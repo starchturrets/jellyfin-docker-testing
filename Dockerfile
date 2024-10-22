@@ -39,7 +39,6 @@ RUN dotnet publish jellyfin-server/Jellyfin.Server --configuration Release --sel
 # Build jellyfin-web
 WORKDIR /home/root/jellyfin-web
 RUN npm ci --no-audit --unsafe-perm
-RUN npx depcheck
 RUN npm run build:production
 
 WORKDIR /home/root
