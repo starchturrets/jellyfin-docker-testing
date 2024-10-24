@@ -54,6 +54,8 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     JELLYFIN_WEB_DIR="/jellyfin/jellyfin-web" \
     JELLYFIN_FFMPEG="/usr/bin/ffmpeg"
 #   JELLYFIN_FFMPEG="/usr/lib/jellyfin-ffmpeg/ffmpeg"
-COPY --from=build /home/root/dist /home/root/dist
+COPY --from=build /jellyfin /jellyfin
+COPY --from=build /jellyfin-web /jellyfin-web
+
 ENTRYPOINT ["/home/root/dist/jellyfin/jellyfin"]
 
