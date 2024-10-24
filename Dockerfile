@@ -29,20 +29,12 @@ RUN mv /home/root/jellyfin-web/dist /home/root/dist/jellyfin/jellyfin-web
 
 # Dependencies?
 FROM alpine:latest AS runtime
+
 RUN apk --no-cache add -u -f \
-	lsb-release \
-	libssl*.* \
-	liblttng-ust*\
-	libssl-dev \
-	libfontconfig*-dev \
-	libcurl*openssl-dev \
-	libfreetype-dev \
 	ffmpeg \
 	icu-libs \
 	icu-data-full
 
-
-#	dotnet8-runtime
 COPY --from=build /home/root/dist /home/root/dist
 
 ENTRYPOINT ["/home/root/dist/jellyfin/jellyfin"]
