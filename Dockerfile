@@ -29,6 +29,9 @@ RUN mv /home/root/jellyfin-web/dist /home/root/dist/jellyfin/jellyfin-web
 
 # Only copy the runtime binaries over
 FROM alpine:latest AS runtime
+apk add --no-cache -u -f \
+	libstdc++6 \
+        libstdc++
 COPY --from=build /home/root/dist /home/root/dist
 
 ENTRYPOINT ["/home/root/dist/jellyfin/jellyfin"]
