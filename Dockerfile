@@ -30,11 +30,27 @@ RUN mv /home/root/jellyfin-web/dist /home/root/dist/jellyfin/jellyfin-web
 # Add minimal dependencies
 FROM alpine:latest AS runtime
 
+# Add hardened_malloc
+COPY --from=ghcr.io/polarix-containers/hardened_malloc:latest /install /usr/local/lib/
+ENV LD_PRELOAD="/usr/local/lib/libhardened_malloc.so"
+
 RUN apk --no-cache add -u -f \
 	ffmpeg \
 	icu-libs \
 	icu-data-full
 
+# Default environment variables for the Jellyfin invocation
+ENV DEBIAN_FRONTEND="noninteractive" \
+    LC_ALL="en_US.UTF-8" \
+    LANG="en_US.UTF-8" \
+    LANGUAGE="en_US:en" \
+    JELLYFIN_DATA_DIR="/config" \
+    JELLYFIN_CACHE_DIR="/cache" \
+    JELLYFIN_CONFIG_DIR="/config/config" \
+    JELLYFIN_LOG_DIR="/config/log" \
+    JELLYFIN_WEB_DIR="/jellyfin/jellyfin-web" \
+    JELLYFIN_FFMPEG="/usr/bin/ffmpeg"
+#   JELLYFIN_FFMPEG="/usr/lib/jellyfin-ffmpeg/ffmpeg"
 COPY --from=build /home/root/dist /home/root/dist
 ENTRYPOINT ["/home/root/dist/jellyfin/jellyfin"]
 
