@@ -30,7 +30,6 @@ RUN mv /home/root/jellyfin-web/dist /home/root/dist/jellyfin/jellyfin-web
 # Dependencies?
 FROM alpine:latest AS runtime
 RUN apk --no-cache add -u -f \
-	devscripts \
 	build-essential \
 	mmv \ 
 	lsb-release \
