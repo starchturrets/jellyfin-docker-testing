@@ -1,4 +1,4 @@
-FROM alpine:latest as build
+FROM alpine:latest AS build
 
 # Install dependencies
 RUN apk --no-cache add -u -f \
@@ -28,7 +28,7 @@ WORKDIR /home/root
 RUN mv /home/root/jellyfin-web/dist /home/root/dist/jellyfin/jellyfin-web
 
 # Only copy the runtime binaries over
-FROM alpine:latest as runtime
+FROM alpine:latest AS runtime
 COPY --from=build /home/root/dist /home/root/dist
 
 ENTRYPOINT ["/home/root/dist/jellyfin/jellyfin"]
