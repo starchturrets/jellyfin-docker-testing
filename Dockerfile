@@ -37,7 +37,8 @@ ENV LD_PRELOAD="/usr/local/lib/libhardened_malloc.so"
 RUN apk --no-cache add -u -f \
 	ffmpeg \
 	icu-libs \
-	icu-data-full
+	icu-data-full \
+	libstdc++
 
 # Default environment variables for the Jellyfin invocation
 ENV DEBIAN_FRONTEND="noninteractive" \
