@@ -38,7 +38,11 @@ RUN apk --no-cache add -u -f \
 	libcurl*openssl-dev \
 	libfreetype-dev \
 	ffmpeg \
-	dotnet8-runtime
+	icu-libs \
+	icu-data-full
+
+
+#	dotnet8-runtime
 COPY --from=build /home/root/dist /home/root/dist
 
 ENTRYPOINT ["/home/root/dist/jellyfin/jellyfin"]
