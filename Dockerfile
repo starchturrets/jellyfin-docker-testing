@@ -30,16 +30,16 @@ RUN mv /home/root/jellyfin-web/dist /home/root/dist/jellyfin/jellyfin-web
 # Add minimal dependencies
 FROM alpine:latest AS runtime
 
-# Add hardened_malloc
-COPY --from=ghcr.io/polarix-containers/hardened_malloc:latest /install /usr/local/lib/
-ENV LD_PRELOAD="/usr/local/lib/libhardened_malloc.so"
-
 RUN apk --no-cache add -u -f \
 	ffmpeg \
 	icu-libs \
 	icu-data-full \
 	libstdc++ \
 	libstdc++6
+
+# Add hardened_malloc
+COPY --from=ghcr.io/polarix-containers/hardened_malloc:latest /install /usr/local/lib/
+ENV LD_PRELOAD="/usr/local/lib/libhardened_malloc.so"
 
 # Default environment variables for the Jellyfin invocation
 ENV DEBIAN_FRONTEND="noninteractive" \
