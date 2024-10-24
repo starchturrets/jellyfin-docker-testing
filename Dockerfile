@@ -6,6 +6,7 @@ RUN apk --no-cache add -u -f \
 	git \
 	dotnet8-sdk \
 	nodejs \ 
+	npm \
 	ffmpeg
 
 # Fetch jellyfin and jellyfin-web
