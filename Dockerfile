@@ -39,7 +39,6 @@ RUN apk --no-cache add -u -f \
 	libfontconfig*-dev \
 	libcurl*openssl-dev \
 	libfreetype-dev \
-	dotnet8-runtime \
 	ffmpeg
 COPY --from=build /home/root/dist /home/root/dist
 
