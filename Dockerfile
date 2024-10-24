@@ -1,27 +1,11 @@
-FROM alpine:latest
+FROM alpine:latest as build
 
 # Install dependencies
 RUN apk --no-cache add -u -f \
-	wget \
 	curl \
-	unzip \
 	git \
-	debhelper \
-	gnupg \
-	devscripts \
-	build-essential \
-	mmv \ 
-	lsb-release \
-	zip \
-	libssl*.* \
-	liblttng-ust*\
-	libssl-dev \
-	libfontconfig*-dev \
-	libcurl*openssl-dev \
-	libfreetype-dev \
 	dotnet8-sdk \
-	nodejs \
-	npm \ 
+	nodejs \ 
 	ffmpeg
 
 # Fetch jellyfin and jellyfin-web
@@ -44,6 +28,9 @@ RUN npm run build:production
 WORKDIR /home/root
 RUN mv /home/root/jellyfin-web/dist /home/root/dist/jellyfin/jellyfin-web
 
+# Only copy the runtime binaries over
+FROM alpine:latest as runtime
+COPY --from=build /home/root/dist /home/root/dist
 
 ENTRYPOINT ["/home/root/dist/jellyfin/jellyfin"]
 
