@@ -25,7 +25,8 @@ RUN npm ci --no-audit --unsafe-perm
 RUN npm run build:production
 
 WORKDIR /home/root
-RUN mv /home/root/jellyfin-web/dist /home/root/dist/jellyfin/jellyfin-web
+RUN mv /home/root/jellyfin /jellyfin
+RUN mv /home/root/jellyfin-web /jellyfin-web
 
 # Add minimal dependencies
 FROM alpine:latest AS runtime
