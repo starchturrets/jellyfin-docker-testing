@@ -10,14 +10,12 @@ RUN apk --no-cache add -u -f \
 	ffmpeg
 
 # Fetch jellyfin and jellyfin-web
-
 WORKDIR /home/root
 RUN git clone https://github.com/jellyfin/jellyfin.git
 RUN mv jellyfin jellyfin-server
 RUN git clone https://github.com/jellyfin/jellyfin-web.git
 
 # Patch jellyfin-server
-
 RUN sed -i '/^\s*NetworkChange\.Network/d' jellyfin-server/src/Jellyfin.Networking/Manager/NetworkManager.cs
 RUN dotnet publish jellyfin-server/Jellyfin.Server --configuration Release --self-contained --runtime linux-musl-x64 --output /home/root/dist/jellyfin -p:DebugSymbols=false -p:DebugType=none -p:UseAppHost=true
 
@@ -34,6 +32,4 @@ FROM alpine:latest as runtime
 COPY --from=build /home/root/dist /home/root/dist
 
 ENTRYPOINT ["/home/root/dist/jellyfin/jellyfin"]
-
-#ENTRYPOINT ["/bin/sh"]
 
