@@ -38,7 +38,8 @@ RUN apk --no-cache add -u -f \
 	ffmpeg \
 	icu-libs \
 	icu-data-full \
-	libstdc++
+	libstdc++ \
+	libstdc++6
 
 # Default environment variables for the Jellyfin invocation
 ENV DEBIAN_FRONTEND="noninteractive" \
