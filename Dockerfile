@@ -26,7 +26,7 @@ RUN npm run build:production
 
 WORKDIR /home/root
 RUN mv /home/root/dist/jellyfin /jellyfin
-RUN mv /home/root/jellyfin-web /jellyfin-web
+RUN mv /home/root/jellyfin-web /jellyfin/jellyfin-web
 
 # Add minimal dependencies
 FROM alpine:latest AS runtime
