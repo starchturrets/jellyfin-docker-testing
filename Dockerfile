@@ -57,5 +57,5 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 COPY --from=build /jellyfin /jellyfin
 COPY --from=build /jellyfin-web /jellyfin-web
 
-ENTRYPOINT ["/home/root/dist/jellyfin/jellyfin"]
+ENTRYPOINT ["/jellyfin/jellyfin"]
 
