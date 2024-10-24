@@ -36,6 +36,5 @@ RUN apk --no-cache add -u -f \
 	icu-data-full
 
 COPY --from=build /home/root/dist /home/root/dist
-
 ENTRYPOINT ["/home/root/dist/jellyfin/jellyfin"]
 
