@@ -4,7 +4,7 @@ FROM alpine:latest AS build
 RUN apk --no-cache add -u -f \
 	curl \
 	git \
-	dotnet8-sdk \
+	dotnet9-sdk \
 	nodejs \ 
 	npm \
 	ffmpeg
